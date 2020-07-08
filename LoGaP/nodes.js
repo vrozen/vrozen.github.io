@@ -109,7 +109,7 @@ var _nodes = [
     pages: "651–654",
     isbn: "978-3-662-45550-0",
     doi: "10.1007/978-3-662-45550-0_67",
-    language: "PerGO",
+    language: "Pervasive Games Ontology",
     msid: "9n"
   },
   {
@@ -199,7 +199,7 @@ var _nodes = [
     isbn: "978-1-4503-1183-0",
     pages: "57–62",
     doi: "10.1145/2095050.2095061",
-    language: "Sharpludus",
+    language: "SharpLudus",
     msid: "16n"
   },
   {
@@ -269,7 +269,7 @@ var _nodes = [
     pages: "280–293",
     issn: "1751-8806",
     doi: "10.1049/iet-sen:20070023",
-    language: "Sharpludus",
+    language: "SharpLudus",
     msid: "25n"
   },
   {
@@ -429,7 +429,7 @@ var _nodes = [
     isbn: "978-1-4673-9203-7",
     issn: "1541-7719",
     msid: "50n",
-    language: "PerGo"
+    language: "Pervasive Games Ontology"
   },
   {
     kind: "inproceedings",
@@ -605,7 +605,7 @@ var _nodes = [
     pages: "19–36",
     publisher: "UVK",
     year: "2007",
-    language: "Inform 6",
+    language: "Inform",
     msid: "74n"
   },
   {
@@ -753,7 +753,7 @@ var _nodes = [
     month: "jun",
     isbn: "978-82-326-0944-4",
     issn: "1503-8181",
-    language: "PerGo",
+    language: "Pervasive Games Ontology",
     publisher: "NTNU-trykk",
     msid: "97n"
   },
@@ -807,6 +807,7 @@ var _nodes = [
     volume: "23",
     number: "1",
     keywords: "Pergo",
+    language: "Pervasive Games Ontology",
     msid: "107n"
   },
   {
@@ -1282,7 +1283,7 @@ var _nodes = [
     doi: "10.1109/VS-Games.2014.7012156",
     isbn: "978-1-4799-4056-1",
     msid: "199n",
-    language: "EngAGe DSL"
+    language: "EngAGe"
   },
   {
     kind: "inproceedings",
@@ -1385,7 +1386,7 @@ var _nodes = [
     institution: "Technische Universität Darmstadt",
     year: "2013",
     month: "jan",
-    language: "StroryTec",
+    language: "StoryTec",
     msid: "238n"
   },
   {
