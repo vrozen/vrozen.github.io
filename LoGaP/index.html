@@ -1,0 +1,549 @@
+<html>
+<meta charset="utf-8">
+<body>		
+<div class="wrapper" id="wrapper">
+  <div class="graph">
+    <svg id='viz'></svg>
+  </div>
+  <div id="controls">
+  	<div class="menuItem">Languages of Games and Play</div>
+	<div class="menuItem">
+      <div class="menuLabel">Author</div>
+	  <div class="menuInput"><input type="text" id="author" size="14"></input></div>					
+    </div>
+    <div class="menuItem">
+      <div class="menuLabel">Title</div>
+	  <div class="menuInput"><input type="text" id="title" size="14"></input></div>
+    </div>
+    <div class="menuItem">
+      <div class="menuLabel">Year</div>
+	  <div class="yearInput"><input type="text" id="lowYear" maxlength="4" size="4"></input></div>
+	  <div class="menuItemCenter">until</div>
+  	  <div class="yearInput"><input type="text" id="highYear" maxlength="4" size="4"></input></div>
+    </div>
+    <div class="menuItem">Language selection</div>			
+    <div class="menuItem">
+	  <div class="menuInput"><select id="language" size="1"><option value=""></option></select></div>					
+    </div>
+    <div class="menuItem">	
+      <div class="menuInput"><input type="button" value="Filter" id="filter"></input></div>
+	  <div class="menuInput"><input name="toggle" type="button" value="Toggle Viewer" id="Toggle"></input></div>		
+	</div>				
+	<div class="author">
+    Riemer van Rozen. “Languages of Games and Play: A Systematic Mapping Study”. Under submission to ACM Computing Surveys. 2020
+	</div>
+    <div id="viewer">
+	  <iframe id="viewerFrame" src="pdfjs/web/viewer.html" width="100%" height="100%"></iframe> 
+    </div>
+  </div>
+  <div id="paperInfo">
+  </div>
+</body>
+
+<style>
+.wrapper {
+  position: relative;
+}
+
+.graph {
+  height: 100%;
+  width: 100%;
+}
+
+.menuItem {
+  height: 24px;
+  display: flex;
+  align-items: center;	
+  font-family: Helvetica;
+  font-size: 12px;
+  font-weight: bold;
+  vertical-align: middle;	
+}
+
+.menuLabel {
+  width: 65px;	
+}
+
+.author {
+  font-family: Helvetica;
+  font-size: 9px;
+  vertical-align: middle;
+}
+		
+.menuInput {
+  width: 60px;
+}
+
+.menuItemCenter {
+  width: 30px;
+  text-align: center;
+}
+
+.yearInput {
+  width: 40px;
+}
+
+#controls {
+  background-color: #eaeaea;		
+  position: absolute;
+  height: 200px;
+  width: 200px;
+  top: 5;
+  left: 5;
+  align: left;
+  padding: 10px 10px;
+}
+		
+#paperInfo {
+  background-color: #eaeaea;		
+  position: absolute;
+  height: 360px;
+  width: 200px;
+  top: 240;
+  left: 5;
+  align: left;
+  padding: 10px 10px;
+  font-size: 11px;		
+}
+
+#viewer {
+  //background-color: #404040;		
+  position: absolute;
+  visibility: hidden;
+  height: 480px;
+  width: 600px;
+  top: 0;
+  left: 220;
+  align: left;
+  padding: 10px 10px;		
+}
+
+</style>
+	
+<script src="d3.js"></script>
+<script src="nodes.js"></script>
+<script src="edges.js"></script>
+
+<script>
+//https://bl.ocks.org/mapio/53fed7d84cd1812d6a6639ed7aa83868
+//Massimo Santini’s Block 53fed7d84cd1812d6a6639ed7aa83868
+//Updated June 4, 2019
+//license: GPL v3 
+var width = 1024;
+var height = 640;
+
+var storeNodes = [];
+var storeEdges = [];
+
+var paperFields = [];
+
+
+//var paperFields = ["kind", "key", "author", "title", "editors", "booktitle", "pages", "series", "publisher", "year", "isbn", "language", "msid", "editor", "doi", "institution", "issn", "volume", "journal", "number", "month", "keywords", "type", "moth", "note", "urldate", "may", "url", "keyword", "school", "publsiher", "howpublished", "edition", "organization", "address", "issue", "day", "insitution"]
+
+//var paperFields = ["author", "title", "booktitle", "insitution", "organization", "editors", "pages", "series", "publisher", "year", "isbn", "language",  "editor", "institution", "volume", "journal", "number", "month", "keywords", "type", "moth",  "keyword", "school", "publsiher", "howpublished", "edition",  "address", "issue", "day", "doi", "issn", "url", "urldate", "note", "msid"]
+		
+_nodes.forEach(function(paper) {		
+  for (var field of Object.keys(paper)){
+    if(!paperFields.includes(field))
+    {
+	  paperFields.push(field);
+    }
+  }
+});
+		
+_nodes.forEach(function(n) { storeNodes.push(n); n.visible = true;});
+_edges.forEach(function(n) { storeEdges.push(n); });
+
+//var color = d3.scaleOrdinal(d3.schemeCategory10);
+
+//d3.select("summary").attr("visibility", "visible");
+		
+//d3.json("miserables.json").then(function(graph) {
+
+		
+
+var adjlist = [];
+
+_edges.forEach(function(d) {
+    adjlist[d.source.index + "-" + d.target.index] = true;
+    adjlist[d.target.index + "-" + d.source.index] = true;
+});
+
+function neigh(a, b) {
+    return a == b || adjlist[a + "-" + b];
+}
+
+var viewer = d3.select("#viewer");
+
+var svg = d3.select("#viz")
+		.attr("width", width)
+		.attr("height", height);
+
+var defs = svg.append('defs');
+
+defs.append('marker')
+        .attr('id', 'arrowhead')
+        .attr('viewBox','-0 -5 10 10')
+        .attr('refX',13)
+        .attr('refY',0)
+        .attr('orient','auto')
+        .attr('markerWidth',13)
+        .attr('markerHeight',13)
+        .attr('xoverflow','visible')
+        .append('svg:path')
+        .attr('d', 'M 0,-5 L 10 ,0 L 0,5')
+        .attr('fill', '#999')
+        .style('stroke','none');
+
+var paperInfo = d3.select("#paperInfo");
+		
+d3.select("#Toggle").on("click", function(d){
+  vis = viewer.style("visibility");
+  if(vis === "hidden")
+  {		
+    viewer.style("visibility", "visible");
+  }
+  else
+  {
+    viewer.style("visibility", "hidden");
+  }
+});
+		
+var link, node, labelNode, graphLayout, container;
+update();
+
+function update()
+{
+  svg.selectAll("*").remove();
+
+  container = svg.append("g");
+		
+  graphLayout = d3.forceSimulation()
+	.force("link", d3.forceLink().id(function(d) { return d.msid; }))
+	.nodes(_nodes)
+    .force("charge", d3.forceManyBody().strength(-3000))
+    .force("center", d3.forceCenter(width / 2, height / 2))
+    .force("x", d3.forceX(width / 2).strength(1))
+    .force("y", d3.forceY(height / 2).strength(1))
+    .force("link", d3.forceLink(_edges).id(function(d) {return d.msid; }).distance(50).strength(1))
+    .on("tick", ticked);
+		
+  svg.call(
+    d3.zoom()
+        .scaleExtent([.1, 4])
+        .on("zoom", function() { container.attr("transform", d3.event.transform); })
+  );
+
+  link = container.append("g").attr("class", "links")
+    .selectAll("line")
+    .data(_edges)
+    .enter()
+    .append("line")
+    .attr("class", "link")
+    .attr('marker-end','url(#arrowhead)')
+    .attr("stroke", "#aaa")
+    .attr("stroke-width", "1px");
+
+  node = container.append("g").attr("class", "nodes")
+    .selectAll("g")
+    .data(_nodes)
+    .enter()
+    .append("circle")
+    .attr("r", 5)
+    .attr("fill", function(d) { if(d.key){ return "green"; } else { return "red"; } } );
+
+		
+  node.on("mouseover", focus).on("mouseout", unfocus);
+
+  node.call(
+    d3.drag()
+        .on("start", dragstarted)
+        .on("drag", dragged)
+        .on("end", dragended)
+  );
+
+
+  labelNode = container.append("g").attr("class", "labelNodes")
+    .selectAll("text")
+    .data(_nodes)
+    .enter()
+    //.append("a")
+    //.attr("xlink:href", "http://whatever.com")		
+    .append("text")
+    .text(function(d) { return d.key; })
+    .style("fill", "#555")
+    .style("font-family", "Arial")
+    .style("font-size", 12)
+    .style("pointer-events", "none"); // to prevent mouseover/drag capture
+
+
+  node.on('click', function(paper) {
+    //var strWindowFeatures = "location=yes,height=570,width=520,scrollbars=yes,status=yes,target='Description'";
+    //var URL = d.keywords + ".html";
+    //var win = window.open(URL, "Description", strWindowFeatures);
+
+		//viewer.style("visibility", "visible");
+
+	var paperText = "<div class='menuItem'>Publication data</div>";
+	for (var field of paperFields)
+	{
+	  if(paper[field])
+	  {
+		if(field === "url")
+	    {
+          paperText += "<div><b>"+field+"</b>: <a target='_blank' href='"+paper[field]+"'>"+paper[field]+"</a></div>";
+		}
+		else if(field === "doi")
+	    {
+          paperText += "<div><b>"+field+"</b>: <a target='_blank' href='http://www.doi.org/"+paper[field]+"'>"+paper[field]+"</a></div>";
+	    }
+		else
+		{
+          paperText += "<div><b>"+field+"</b>: "+paper[field]+"</div>";
+	    }
+	  }
+    }
+		
+	paperInfo.html(paperText);
+
+	var win = window.frames.viewerFrame.contentWindow;
+
+	win.postMessage(paper.language, 'http://127.0.0.1:8000');
+    //summary.html(d.keywords);
+    //viewer.html("<iframe width='100%' height='100%' src='pdfjs/web/viewer.html?"+file+"#search='"+query+"'></iframe>");
+    //summary.html("<input name='close' type='button' value='Close' id='Close'/><iframe src='pdfjs/web/viewer.html'></iframe>");
+  })
+		
+  node.on("mouseover", focus).on("mouseout", unfocus);
+}
+
+//https://stackoverflow.com/questions/29987478/pdf-js-using-search-function-on-embedded-pdf
+function searchPDF(td_text) {
+    PDFView.findBar.open();
+    $(PDFView.findBar.findField).val(td_text);
+    $("#tableDiv").focus();
+
+    var event = document.createEvent('CustomEvent');
+    event.initCustomEvent('find', true, true, {
+        query: td_text,
+        caseSensitive: $("#findMatchCase").prop('checked'),
+        highlightAll: $("#findHighlightAll").prop('checked'),
+        findPrevious: undefined
+    });
+    return event;
+}
+		
+function ticked() {
+    node.call(updateNode);
+    link.call(updateLink);
+    labelNode.call(updateNode);		
+}
+
+function fixna(x) {
+    if (isFinite(x)) return x;
+    return 0;
+}
+
+function focus(d) {
+    var index = d3.select(d3.event.target).datum().index;
+    node.style("opacity", function(o) {
+        return neigh(index, o.index) ? 1 : 0.1;
+    });
+    //labelNode.attr("display", function(o) {
+    //  return neigh(index, o.node.index) ? "block": "none";
+    //});
+    link.style("opacity", function(o) {
+        return o.source.index == index || o.target.index == index ? 1 : 0.1;
+    });
+}
+
+function unfocus() {
+   //labelNode.attr("display", "block");
+   node.style("opacity", 1);
+   link.style("opacity", 1);
+}
+
+function updateLink(link) {
+    link.attr("x1", function(d) { return fixna(d.source.x); })
+        .attr("y1", function(d) { return fixna(d.source.y); })
+        .attr("x2", function(d) { return fixna(d.target.x); })
+        .attr("y2", function(d) { return fixna(d.target.y); });
+}
+
+function updateNode(node) {
+    node.attr("transform", function(d) {
+        return "translate(" + fixna(d.x) + "," + fixna(d.y) + ")";
+    });
+}
+
+function dragstarted(d) {
+    d3.event.sourceEvent.stopPropagation();
+    if (!d3.event.active) graphLayout.alphaTarget(0.3).restart();
+    d.fx = d.x;
+    d.fy = d.y;
+}
+
+function dragged(d) {
+    d.fx = d3.event.x;
+    d.fy = d3.event.y;
+}
+
+function dragended(d) {
+    if (!d3.event.active) graphLayout.alphaTarget(0);
+    d.fx = null;
+    d.fy = null;
+}
+
+//Updates the graph visibility, including only publications by a specific author.
+//input: string name
+//output: null
+function filterByAuthor(name)
+{
+  storeNodes.forEach(function(article) {
+	result = false;
+    if(article.author)
+	{
+	  if(article.author.toLowerCase().includes(name))
+	  {
+	    result = true;
+	  }
+    }
+	article.visible = article.visible && result;
+  });
+}
+
+function filterByYear(lowYear, highYear)
+{
+  storeNodes.forEach(function(article) {
+	result = false;		
+    if(article.year)
+	{
+	  if(article.year >= lowYear && article.year <= highYear)
+	  {
+		result = true;
+	  }
+    }
+	article.visible = article.visible && result;	
+  });
+}
+
+function filterByTitle(word)
+{
+  storeNodes.forEach(function(article) {
+	result = false;		
+    if(article.title)
+	{
+	  if(article.title.toLowerCase().includes(word))
+	  {
+		result = true;
+	  }
+    }
+	article.visible = article.visible && result;
+  });
+}
+
+function filterByLanguage(language)
+{
+   storeNodes.forEach(function(article) {
+	result = false;		
+    if(article.language)
+	{
+	  if(article.language.toLowerCase() === language)
+	  {
+		result = true;
+	  }
+    }
+	article.visible = article.visible && result;
+  });		
+}
+
+langBox = d3.select("#language");
+foundLanguages = [];
+_nodes.forEach(function(n) {
+		if(n.language)
+	    {
+		  if(!foundLanguages.includes(n.language))
+		  {
+		    foundLanguages.push(n.language);
+		  }
+	    }
+  });
+
+foundLanguages.sort();
+
+foundLanguages.forEach(function(language) {
+    langBox.append("option")
+	.text(language)
+	.attr("value", language);
+  });
+		
+controls = d3.select("#filter");
+controls.on("click", function(d) {
+    author = document.getElementById("author").value.toLowerCase();
+
+    lowYear = document.getElementById("lowYear").value;
+
+	highYear = document.getElementById("highYear").value;
+
+	title = document.getElementById("title").value.toLowerCase();
+
+	language = d3.select("#language").property("value");
+		
+    storeNodes.forEach(function(n) { n.visible = true;});
+		
+    if(author !== "")
+	{
+	  filterByAuthor(author);
+    }
+
+	if(lowYear !== "" || highYear !== "")
+	{		
+      if(lowYear === "")
+  	  {
+	    lowYear = 0;
+  	  }
+      if(highYear === "")
+      {
+        highYear = 9999;
+      }		
+	  filterByYear(lowYear, highYear);
+	}
+		
+	if(title !== "")
+	{
+	  filterByTitle(title);
+	}
+
+	if(language !== "")
+	{
+	  filterByLanguage(language.toLowerCase());
+	  var win = window.frames.viewerFrame.contentWindow;
+      win.postMessage(language, 'http://127.0.0.1:8000');
+	}
+
+    filter();
+    update();
+});
+
+		
+function filter() {
+	_nodes = new Array();
+    _edges = new Array();		
+		
+	storeNodes.forEach(function(n) {
+	  if (n.visible) {
+		_nodes.push(n);
+	  }
+	});
+
+	storeEdges.forEach(function(e) {
+      if(_nodes.includes(e.source) && _nodes.includes(e.target))
+	  {
+	    _edges.push(e);
+	  }
+	});
+}
+//}); // d3.json
+</script>
+</body>
+</html>
