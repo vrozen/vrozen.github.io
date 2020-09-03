@@ -308,7 +308,7 @@ function update()
 
 	var win = window.frames.viewerFrame.contentWindow;
 
-    win.postMessage(paper.language, 'https://vrozen.github.io/LoGaP/');
+    win.postMessage(paper.language, 'https://vrozen.github.io/LoGaP:8080');
     		
 	//win.postMessage(paper.language, 'http://127.0.0.1:8000');
     //summary.html(d.keywords);
@@ -521,7 +521,7 @@ controls.on("click", function(d) {
 	  filterByLanguage(language.toLowerCase());
 	  var win = window.frames.viewerFrame.contentWindow;
       //win.postMessage(language, 'http://127.0.0.1:8000');
-	  win.postMessage(language, 'https://vrozen.github.io/LoGaP/');
+	  win.postMessage(language, 'https://vrozen.github.io/LoGaP:8080');
 	}
 
     filter();
