@@ -83,7 +83,7 @@
     background-color: #ffffff;
     position: absolute;
     visibility: visible;
-    height: 700px;
+    height: 760px;
     width: 640px;
     top: 0;
     left: 230;
@@ -121,9 +121,6 @@
     <div class="menuInput"><input type="button" value="Filter" id="filter"></input></div>
     <div class="menuInput"><input name="toggleViewer" type="button" value="Toggle Viewer" id="ToggleViewer"></input></div>	
   </div>
-	<div class="author">
-    Riemer van Rozen. "Languages of Games and Play: A Systematic Mapping Study". In: ACM Comput. Surv. 53.6 (Dec. 2020).
-	</div>
     <div id="viewer">
 	  <iframe id="viewerFrame" src="pdfjs/web/viewer.html" width="100%" height="100%"></iframe> 
     </div>
@@ -131,28 +128,29 @@
   <div>
 <div id="Welcome">  
 <pre>
-                                              Amsterdam, January 5th 2021
+                                                      Amsterdam, January 5th 2021
 Welcome!
 
-This website is an interactive version of a systematic mapping study
-on "Languages of Games and Play" (BibTeX shown below). It wraps the
-journal article (and its appendix) and provides additional features.
+This website is an interactive version of a systematic mapping study on
+"Languages of Games and Play" [1] based on Chapter 2 of my PhD thesis [2].
+It wraps the journal article (and its appendix) and provides additional features.
   
 *  The main view shows a graph of publications (nodes)
    and citations (edges) between them.
 *  Click on the nodes to inspect publication info.
 *  Zoom in and out for inspecting parts of the graph.   
 *  Rearch and filter by author name, publication title or year
-   or select a language using the controls on the left.
+   or select a language by using the controls on the left.
 *  Toggle the PDF viewer on and off for reading the paper,
    and finding summaries of the languages.
 *  To close the welcome message click the button below.
 
 I hope this map can assist readers in identifying relevant publications,
 navigating between research areas and technological spaces,
-and charting new trajectories for future research and development.
+and charting new trajectories for research and development.
 The website is intended as a 'living document' that
 through maintenance and extensions remains up-to-date.
+In case you want to cite the article, please find the BibTeX below.
 
 Please let me know if you have comments, questions or if you found bugs.
 I would be happy to discuss my findings!
@@ -164,20 +162,22 @@ Riemer van Rozen (Email: rozen[at]cwi.nl, Twitter: @rvrozen)
   <div class="menuInput"><input name="toggleWelcome" type="button" value="Close welcome message" id="ToggleWelcome"></input></div>  
 </div>
 <pre>
+[1] R. van Rozen. “Languages of Games and Play: A Systematic Mapping Study”.
+    In: ACM Comput. Surv. 53.6 (Dec. 2020). DOI: 10.1145/3412843
+[2] R. van Rozen. "Languages of Games and Play: Automating Game Design &
+    Enabling Live Programming". PhD thesis. University of Amsterdam, Feb. 2020
 <code>
 @article{vRozen2020,
   author     = {van Rozen, Riemer},
   title      = {{L}anguages of {G}ames and {P}lay:
 {A} {S}ystematic {M}apping {S}tudy},
+  journal    = {ACM Comput. Surv.},
   year       = {2020},
+  month      = dec,
   publisher  = {ACM},
   volume     = {53},
   number     = {6},
-  issn       = {0360-0300},
   doi        = {10.1145/3412843},
-  journal    = {ACM Comput. Surv.},
-  month      = dec,
-  articleno  = {123},
 }
 </code>
 </pre>
