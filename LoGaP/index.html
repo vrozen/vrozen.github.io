@@ -1,6 +1,98 @@
 <html>
 <meta charset="utf-8">
-<body>		
+
+<style>
+  .wrapper {
+    position: relative;
+  }
+  
+  .graph {
+    height: 100%;
+    width: 100%;
+  }
+  
+  .menuItem {
+    height: 24px;
+    display: flex;
+    align-items: center;	
+    font-family: Helvetica;
+    font-size: 12px;
+    font-weight: bold;
+    vertical-align: middle;	
+  }
+  
+  .menuLabel {
+    width: 65px;	
+  }
+  
+  .author {
+    font-family: Helvetica;
+    font-size: 9px;
+    vertical-align: middle;
+  }
+      
+  .menuInput {
+    width: 60px;
+  }
+  
+  .menuItemCenter {
+    width: 30px;
+    text-align: center;
+  }
+  
+  .yearInput {
+    width: 40px;
+  }
+  
+  #controls {
+    background-color: #eaeaea;		
+    position: absolute;
+    height: 200px;
+    width: 200px;
+    top: 5;
+    left: 5;
+    align: left;
+    padding: 10px 10px;
+  }
+      
+  #paperInfo {
+    background-color: #eaeaea;		
+    position: absolute;
+    height: 360px;
+    width: 200px;
+    top: 240;
+    left: 5;
+    align: left;
+    padding: 10px 10px;
+    font-size: 11px;		
+  }
+  
+  #viewer {
+    //background-color: #404040;		
+    position: absolute;
+    visibility: hidden;
+    height: 640px;
+    width: 1024px;
+    top: 0;
+    left: 220;
+    align: left;
+    padding: 10px 10px;		
+  }
+  
+  #welcome {
+    background-color: #ffffff;
+    position: absolute;
+    visibility: visible;
+    height: 640px;
+    width: 800px;
+    top: 0;
+    left: 230;
+    align: left;
+    padding: 10px 10px;	
+  }
+</style>
+
+<body>
 <div class="wrapper" id="wrapper">
   <div class="graph">
     <svg id='viz'></svg>
@@ -8,117 +100,91 @@
   <div id="controls">
   	<div class="menuItem">Languages of Games and Play</div>
 	<div class="menuItem">
-      <div class="menuLabel">Author</div>
+    <div class="menuLabel">Author</div>
 	  <div class="menuInput"><input type="text" id="author" size="14"></input></div>					
-    </div>
-    <div class="menuItem">
-      <div class="menuLabel">Title</div>
+  </div>
+  <div class="menuItem">
+    <div class="menuLabel">Title</div>
 	  <div class="menuInput"><input type="text" id="title" size="14"></input></div>
-    </div>
-    <div class="menuItem">
-      <div class="menuLabel">Year</div>
+  </div>
+  <div class="menuItem">
+    <div class="menuLabel">Year</div>
 	  <div class="yearInput"><input type="text" id="lowYear" maxlength="4" size="4"></input></div>
 	  <div class="menuItemCenter">until</div>
-  	  <div class="yearInput"><input type="text" id="highYear" maxlength="4" size="4"></input></div>
-    </div>
-    <div class="menuItem">Language selection</div>			
-    <div class="menuItem">
+  	<div class="yearInput"><input type="text" id="highYear" maxlength="4" size="4"></input></div>
+  </div>
+  <div class="menuItem">Language selection</div>			
+  <div class="menuItem">
 	  <div class="menuInput"><select id="language" size="1"><option value=""></option></select></div>					
-    </div>
-    <div class="menuItem">	
-      <div class="menuInput"><input type="button" value="Filter" id="filter"></input></div>
-	  <div class="menuInput"><input name="toggle" type="button" value="Toggle Viewer" id="Toggle"></input></div>		
-	</div>				
+  </div>
+  <div class="menuItem">	
+    <div class="menuInput"><input type="button" value="Filter" id="filter"></input></div>
+    <div class="menuInput"><input name="toggleViewer" type="button" value="Toggle Viewer" id="ToggleViewer"></input></div>	
+  </div>
 	<div class="author">
-    Riemer van Rozen. “Languages of Games and Play: A Systematic Mapping Study”. Under submission to ACM Computing Surveys. 2020
+    Riemer van Rozen. "Languages of Games and Play: A Systematic Mapping Study". In: ACM Comput. Surv. 53.6 (Dec. 2020).
 	</div>
     <div id="viewer">
 	  <iframe id="viewerFrame" src="pdfjs/web/viewer.html" width="100%" height="100%"></iframe> 
+    </div>
+  </div>
+  <div>
+<div id="Welcome">  
+<pre>
+                                              Amsterdam, January 5th 2021
+Welcome!
+
+This website is an interactive version of a systematic mapping study
+on "Languages of Games and Play". It wraps the journal article
+(BibTex shown below) and provides additional features.
+  
+*  The main view shows a graph of publications (nodes)
+   and citations (edges) between them.
+*  Click on the nodes to inspect publication info.
+*  Zoom in and out for inspecting parts of the graph.    
+*  Please use the controls on the left to search
+   and filter authors and languages.
+*  Toggle the PDF viewer on and off for reading the paper,
+   and finding summaries of the languages.
+*  To close the welcome message click the button below.
+
+I hope this map can help readers in identifying relevant publications,
+navigating between research areas and technological spaces,
+and charting new trajectories for future research and development.
+
+Please let me know if you have comments, questions or discussion points!
+
+Best regards,
+Riemer van Rozen (Email: rozen[at]cwi.nl, Twitter: @rvrozen)
+
+</pre>
+<div class="menuItem">	
+  <div class="menuInput"><input name="toggleWelcome" type="button" value="Close welcome message" id="ToggleWelcome"></input></div>  
+</div>
+<pre>
+<code>
+@article{vRozen2020,
+  author     = {van Rozen, Riemer},
+  title      = {{L}anguages of {G}ames and {P}lay: A} {S}ystematic {M}apping {S}tudy},
+  year       = {2020},
+  publisher  = {ACM},
+  volume     = {53},
+  number     = {6},
+  issn       = {0360-0300},
+  doi        = {10.1145/3412843},
+  journal    = {ACM Comput. Surv.},
+  month      = dec,
+  articleno  = {123},
+}
+</code>
+</pre>
     </div>
   </div>
   <div id="paperInfo">
   </div>
 </body>
 
-<style>
-.wrapper {
-  position: relative;
-}
 
-.graph {
-  height: 100%;
-  width: 100%;
-}
-
-.menuItem {
-  height: 24px;
-  display: flex;
-  align-items: center;	
-  font-family: Helvetica;
-  font-size: 12px;
-  font-weight: bold;
-  vertical-align: middle;	
-}
-
-.menuLabel {
-  width: 65px;	
-}
-
-.author {
-  font-family: Helvetica;
-  font-size: 9px;
-  vertical-align: middle;
-}
-		
-.menuInput {
-  width: 60px;
-}
-
-.menuItemCenter {
-  width: 30px;
-  text-align: center;
-}
-
-.yearInput {
-  width: 40px;
-}
-
-#controls {
-  background-color: #eaeaea;		
-  position: absolute;
-  height: 200px;
-  width: 200px;
-  top: 5;
-  left: 5;
-  align: left;
-  padding: 10px 10px;
-}
-		
-#paperInfo {
-  background-color: #eaeaea;		
-  position: absolute;
-  height: 360px;
-  width: 200px;
-  top: 240;
-  left: 5;
-  align: left;
-  padding: 10px 10px;
-  font-size: 11px;		
-}
-
-#viewer {
-  //background-color: #404040;		
-  position: absolute;
-  visibility: hidden;
-  height: 640px;
-  width: 1024px;
-  top: 0;
-  left: 220;
-  align: left;
-  padding: 10px 10px;		
-}
-
-</style>
 	
 <script src="d3.js"></script>
 <script src="nodes.js"></script>
@@ -174,6 +240,7 @@ function neigh(a, b) {
 }
 
 var viewer = d3.select("#viewer");
+var welcome = d3.select("#welcome");
 
 var svg = d3.select("#viz")
 		.attr("width", width)
@@ -196,12 +263,26 @@ defs.append('marker')
         .style('stroke','none');
 
 var paperInfo = d3.select("#paperInfo");
+
+d3.select("#ToggleWelcome").on("click", function(d){
+  vis = welcome.style("visibility");
+  if(vis === "hidden")
+  {		
+    welcome.style("visibility", "visible");
+    viewer.style("visibility", "hidden");
+  }
+  else
+  {
+    welcome.style("visibility", "hidden");
+  }
+});
 		
-d3.select("#Toggle").on("click", function(d){
+d3.select("#ToggleViewer").on("click", function(d){
   vis = viewer.style("visibility");
   if(vis === "hidden")
   {		
     viewer.style("visibility", "visible");
+    welcome.style("visibility", "hidden");    
   }
   else
   {
