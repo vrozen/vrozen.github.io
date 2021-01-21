@@ -10,6 +10,50 @@
     height: 100%;
     width: 100%;
   }
+
+  .title {
+    height: 30px;
+    width: 240px;
+    display: flex;
+    align-items: center;	
+    font-family: Helvetica;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    vertical-align: middle;	  
+    padding: 0px 10px;    
+  }
+
+  .menuTabOff {
+    height: 30px;
+    width: 110px;
+    display: flex;
+    align-items: center;	
+    font-family: Helvetica;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    align-content: center; 
+  }
+
+  .menuTabOn {
+    //border-width:2px;
+    //border-style:solid;
+    //border-color:black;
+    background-color: white;
+    height: 30px;
+    width: 110px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    color: black;
+    font-family: Helvetica;
+    font-size: 14px;
+    font-weight: bold;
+  }
   
   .menuItem {
     height: 24px;
@@ -22,7 +66,7 @@
   }
   
   .menuLabel {
-    width: 65px;	
+    width: 50px;	
   }
   
   .author {
@@ -32,7 +76,7 @@
   }
       
   .menuInput {
-    width: 60px;
+    width: 50px;
   }
   
   .menuItemCenter {
@@ -43,65 +87,100 @@
   .yearInput {
     width: 40px;
   }
+
+  .centerPageBig {
+    background-color: white;
+    position: absolute;
+    visibility: visible;
+    height: 800px;
+    width: 640px;
+    top: 30;
+    left: 190;
+    padding: 5px 5px;	
+  }
+
+  .centerPageSmall {
+    background-color: white;
+    position: absolute;
+    visibility: hidden;
+    height: 480px;
+    width: 640px;
+    top: 30;
+    left: 190;
+    padding: 5px 5px;	
+  } 
+
+  .centerPageText {
+    padding: 5px 5px;	
+  } 
+
+  .photo {
+    width: 100pt;
+    position: relative;
+    display: flex;     
+    left: 360pt;
+    top: -200pt;
+  }
+
+  #menuBar {
+    background-color: steelblue;	
+    position: absolute;
+    display: flex;    
+    height: 30px;
+    width: 100%;
+    top: 0;
+    left: 0;
+  }
   
   #controls {
-    background-color: #eaeaea;		
+    background-color: lightsteelblue;		
     position: absolute;
     height: 200px;
-    width: 200px;
-    top: 5;
-    left: 5;
-    align: left;
-    padding: 10px 10px;
+    width: 170px;
+    top: 30;
+    left: 0;
+    padding: 5px 10px;
   }
-      
+  
   #paperInfo {
-    background-color: #eaeaea;		
+    background-color:lightsteelblue;		
     position: absolute;
     height: 360px;
-    width: 200px;
-    top: 240;
-    left: 5;
-    align: left;
-    padding: 10px 10px;
+    width: 170px;
+    top: 210;
+    left: 0;
+    padding: 5px 10px;
     font-size: 11px;		
   }
   
-  #viewer {
-    //background-color: #404040;		
+  #viewer {	
     position: absolute;
     visibility: hidden;
     height: 640px;
     width: 1024px;
-    top: 0;
-    left: 220;
-    align: left;
-    padding: 10px 10px;		
-  }
-  
-  #welcome {
-    background-color: #ffffff;
-    position: absolute;
-    visibility: visible;
-    height: 760px;
-    width: 640px;
-    top: 0;
-    left: 230;
-    align: left;
-    padding: 10px 10px;	
+    top: 30;
+    left: 190;
+    padding: 5px 5px;		
   }
 </style>
 
 <body>
-<div class="wrapper" id="wrapper">
-  <div class="graph">
-    <svg id='viz'></svg>
-  </div>
-  <div id="controls">
-  	<div class="menuItem">Languages of Games and Play</div>
-	<div class="menuItem">
+<div id="menuBar">
+  <div class="title">Language of Games and Play</div>
+  <div class="menuTabOn" id="WelcomeTab">Welcome</div>
+  <div class="menuTabOff" id="ViewerTab">Paper</div>
+  <div class="menuTabOff" id="CloseTab">Map</div>  
+  <div class="menuTabOff" id="AboutTab">About</div>  
+  <div class="menuTabOff" id="HelpTab">Help</div>
+</div>
+
+<div class="graph"><svg id='viz'></svg></div>
+
+<div id="controls">
+  <div class="menuItem">Search Controls</div>
+  <div class="menuItem">
     <div class="menuLabel">Author</div>
-	  <div class="menuInput"><input type="text" id="author" size="14"></input></div>					
+    <div class="menuInput"><input type="text" id="author" size="14"></input></div>					
   </div>
   <div class="menuItem">
     <div class="menuLabel">Title</div>
@@ -111,89 +190,122 @@
     <div class="menuLabel">Year</div>
 	  <div class="yearInput"><input type="text" id="lowYear" maxlength="4" size="4"></input></div>
 	  <div class="menuItemCenter">until</div>
-  	<div class="yearInput"><input type="text" id="highYear" maxlength="4" size="4"></input></div>
+    <div class="yearInput"><input type="text" id="highYear" maxlength="4" size="4"></input></div>
   </div>
-  <div class="menuItem">Language selection</div>			
+  <hr>
+  <div class="menuItem">Language Selection</div>			
   <div class="menuItem">
 	  <div class="menuInput"><select id="language" size="1"><option value=""></option></select></div>					
   </div>
-  <div class="menuItem">	
-    <div class="menuInput"><input type="button" value="Filter" id="filter"></input></div>
-    <div class="menuInput"><input name="toggleViewer" type="button" value="Toggle Viewer" id="ToggleViewer"></input></div>	
-  </div>
-    <div id="viewer">
-	  <iframe id="viewerFrame" src="pdfjs/web/viewer.html" width="100%" height="100%"></iframe> 
-    </div>
-  </div>
-  <div>
-<div id="Welcome">  
+  <hr>
+</div>
+
+<div id="paperInfo"><div class='menuItem'>Publication Data</div></div>  
+
+<div id="viewer"><iframe id="viewerFrame" src="pdfjs/web/viewer.html" width="100%" height="100%"></iframe> </div>
+
+<div id="Welcome" class="centerPageBig">
+<img width="100%" src="LoGaP.jpg">
+<div class="centerPageText">
 <pre>
-                                                      Amsterdam, January 5th 2021
-Welcome!
+                                                    Amsterdam, January 20th 2021
+<b>Welcome!</b>
 
-This website is an interactive version of a systematic mapping study on
-"Languages of Games and Play" [1] based on Chapter 2 of my PhD thesis [2].
-It wraps the journal article (and its appendix) and provides additional features.
-  
-*  The main view shows a graph of publications (nodes)
-   and citations (edges) between them.
-*  Click on the nodes to inspect publication info.
-*  Zoom in and out for inspecting parts of the graph.   
-*  Rearch and filter by author name, publication title or year
-   or select a language by using the controls on the left.
-*  Toggle the PDF viewer on and off for reading the paper,
-   and finding summaries of the languages.
-*  To close the welcome message click the button below.
+<i>Languages of Games and Play</i> (LoGaP) are language-centric approaches for tackling
+challenges and solving problems related to game design and game development.
 
-I hope this map can assist readers in identifying relevant publications,
-navigating between research areas and technological spaces,
-and charting new trajectories for research and development.
-The website is intended as a 'living document' that
-through maintenance and extensions remains up-to-date.
-In case you want to cite the article, please find the BibTeX below.
+This website is an interactive version of a systematic mapping study on Languages
+of Games and Play that wraps the journal article <b>[1]</b> (and its appendix)
+and provides additional features. It is based on Chapter 2 of my PhD thesis <b>[2]</b>.
 
-Please let me know if you have comments, questions or if you found bugs.
-I would be happy to discuss my findings!
+Here, our goal is to identify what informs the design of good games in order to
+help speed-up the game development process for creating better games more quickly.
+In particular, we study to what extent <i>languages, structured notations, patterns
+and tools</i>, can offer designers and developers theoretical foundations, systematic
+techniques and practical solutions they need to raise their productivity and
+improve the quality of games and play. Our map contributes:
+<ul><li>An overview of research areas and publication venues.</li>
+<li>A set of 14 perspectives on LoGaP synthesized from summaries of over
+100 distinct languages we identified in over 1400 publications.</li>
+<li>An analysis of general trends and success factors of the identified
+research, and one unifying specific perspective on <i>Automated Game Gesign</i>,
+which discusses challenges and opportunities for directions in future R&D.</li></ul>This website is intended as a <i>'living document'</i> that remains up-to-date.
+Please feel free to contact me if you have comments or questions, 
+if you wish to discuss a topic or if you found bugs.
+In case you want to cite the article, please find the BibTeX <a a target='_blank' href="https://vrozen.github.io/LoGaP/LoGaP_vRozen2020.bib"">here</a>.
 
 Best regards,
-Riemer van Rozen (Email: rozen[at]cwi.nl, Twitter: @rvrozen)
+Riemer van Rozen
+
+email: rozen[at]cwi[dot]nl | twitter: <a target='_blank' href="https://twitter.com/rvrozen">@rvrozen</a>
+
+<b>References</b>
+<b>[1]</b> R. van Rozen. “Languages of Games and Play: A Systematic Mapping Study”.
+    In: ACM Comput. Surv. 53.6 (Dec. 2020). DOI: <a target='_blank' href="http://www.doi.org/10.1145/3412843">10.1145/3412843</a>. <a target='_blank' href="https://vrozen.github.io/LoGaP/pdfjs/web/LoGaP_vRozen2020.pdf">[PDF]</a> <a a target='_blank' href="https://vrozen.github.io/LoGaP/LoGaP_vRozen2020.bib"">[BibTeX]</a>. 
+<b>[2]</b> R. van Rozen. "Languages of Games and Play: Automating Game Design &
+    Enabling Live Programming". PhD thesis. University of Amsterdam, Feb. 2020.
+    URL: <a target='_blank' href="https://hdl.handle.net/11245.1/5b899657-b786-46e0-815b-be669f002514">https://hdl.handle.net/11245.1/5b899657-b786-46e0-815b-be669f002514</a>
 </pre>
-<div class="menuItem">	
-  <div class="menuInput"><input name="toggleWelcome" type="button" value="Close welcome message" id="ToggleWelcome"></input></div>  
 </div>
+</div>
+
+<div id="about" class="centerPageSmall">
+<img width="100%" src="LoGaP.jpg">
+<div class="centerPageText">
 <pre>
-[1] R. van Rozen. “Languages of Games and Play: A Systematic Mapping Study”.
-    In: ACM Comput. Surv. 53.6 (Dec. 2020). DOI: 10.1145/3412843
-[2] R. van Rozen. "Languages of Games and Play: Automating Game Design &
-    Enabling Live Programming". PhD thesis. University of Amsterdam, Feb. 2020
-<code>
-@article{vRozen2020,
-  author    = {van Rozen, Riemer},
-  title     = {{L}anguages of {G}ames and {P}lay:
-{A} {S}ystematic {M}apping {S}tudy},
-  journal   = {ACM Comput. Surv.},
-  year      = {2020},
-  month     = dec,
-  publisher = {ACM},
-  volume    = {53},
-  number    = {6},
-  doi       = {10.1145/3412843},
-}
-</code>
+<b>About the author</b>
+
+Riemer van Rozen is a postdoctoral researcher at Centrum
+Wiskunde & Informatica (CWI) and a lecturer of Software
+Evolution at the University of Amsterdam (UvA).
+
+Since 2011 he has collaborated with industry in several
+applied research projects on languages and tools that
+speed-up development and improve software quality.
+
+His research focuses on generic solutions for domain-
+specific languages and live programming environments
+in general, and automated game design in particular.
+
+This research was funded under the NWO/SIA grants
+Early Quality Assurance in Software Production,
+Automated Game Design and Live Game Design.
+The work has been performed in collaboration with the
+Amsterdam University of Applied Sciences (AUAS).
+
+<img width="100pt" class="photo" src="rozen_new_small.jpg">
 </pre>
-    </div>
-  </div>
-  <div id="paperInfo">
-  </div>
+</div>
+</div>
+
+<div id="help" class="centerPageSmall">
+<img width="100%" src="LoGaP.jpg">
+<div class="centerPageText">
+<pre>
+<b>This interactive map offers the following features:</b>
+<ul><li>Use the menu bar at the top for selecting a page (or tab) to view.</li>
+<li>Select the 'Paper' tab for reading the article in a built-in PDF viewer.</li>
+<li>Select the 'Map' tab to enable the main view. It shows the map as a graph
+of publications (nodes) and citations (edges) between them, where <span style='color:green'>green</span>
+and <span style='color:red'>red</span> nodes respectively represent included and excluded publications.</li>
+<li>Zoom in and out for inspecting parts of the graph.</li>
+<li>Search and filter publications by author name, title or year
+or select a language by using the 'Search Controls' on the left.</li>
+<li>Click on the <span style='color:green'>green</span> nodes to inspect the bibliographic data
+of a publication in the 'Publication Data' area on the left.</li>
+<li>When selecting a publication or a language, the built-in PDF viewer
+finds the associated language summary inside the article.</li></ul>
+</pre>
+</div>
+</div>   
 </body>
 
-
-	
 <script src="d3.js"></script>
 <script src="nodes.js"></script>
 <script src="edges.js"></script>
 
 <script>
+//For more information, visit <a target='_blank' href="http://vrozen.github.io.">http://vrozen.github.io</a>
 //https://bl.ocks.org/mapio/53fed7d84cd1812d6a6639ed7aa83868
 //Massimo Santini’s Block 53fed7d84cd1812d6a6639ed7aa83868
 //Updated June 4, 2019
@@ -229,8 +341,6 @@ _edges.forEach(function(n) { storeEdges.push(n); });
 		
 //d3.json("miserables.json").then(function(graph) {
 
-		
-
 var adjlist = [];
 
 _edges.forEach(function(d) {
@@ -242,8 +352,16 @@ function neigh(a, b) {
     return a == b || adjlist[a + "-" + b];
 }
 
+var welcomeTab = d3.select("#WelcomeTab");
+var viewerTab = d3.select("#ViewerTab");
+var helpTab = d3.select("#HelpTab");
+var aboutTab = d3.select("#AboutTab");
+var closeTab = d3.select("#CloseTab");
+
 var viewer = d3.select("#viewer");
 var welcome = d3.select("#welcome");
+var about = d3.select("#about");
+var help = d3.select("#help");
 
 var svg = d3.select("#viz")
 		.attr("width", width)
@@ -267,31 +385,50 @@ defs.append('marker')
 
 var paperInfo = d3.select("#paperInfo");
 
-d3.select("#ToggleWelcome").on("click", function(d){
-  vis = welcome.style("visibility");
-  if(vis === "hidden")
-  {		
-    welcome.style("visibility", "visible");
-    viewer.style("visibility", "hidden");
-  }
-  else
-  {
-    welcome.style("visibility", "hidden");
-  }
+function clearTabs()
+{
+  viewer.style("visibility", "hidden");
+  welcome.style("visibility", "hidden");
+  about.style("visibility", "hidden"); 
+  help.style("visibility", "hidden");
+
+  welcomeTab.attr("class", "menuTabOff");
+  viewerTab.attr("class", "menuTabOff");
+  aboutTab.attr("class", "menuTabOff");  
+  closeTab.attr("class", "menuTabOff");
+  helpTab.attr("class", "menuTabOff");
+}
+
+welcomeTab.on("click", function(d){
+  clearTabs();
+  welcome.style("visibility", "visible");
+  welcomeTab.attr("class", "menuTabOn");
 });
 		
-d3.select("#ToggleViewer").on("click", function(d){
-  vis = viewer.style("visibility");
-  if(vis === "hidden")
-  {		
-    viewer.style("visibility", "visible");
-    welcome.style("visibility", "hidden");    
-  }
-  else
-  {
-    viewer.style("visibility", "hidden");
-  }
+viewerTab.on("click", function(d){
+  clearTabs();  
+  viewer.style("visibility", "visible");
+  viewerTab.attr("class", "menuTabOn");
 });
+
+
+aboutTab.on("click", function(d){
+  clearTabs();  
+  about.style("visibility", "visible"); 
+  aboutTab.attr("class", "menuTabOn");
+});
+
+helpTab.on("click", function(d){
+  clearTabs();  
+  help.style("visibility", "visible"); 
+  helpTab.attr("class", "menuTabOn");
+});
+
+closeTab.on("click", function(d){
+  clearTabs();
+  closeTab.attr("class", "menuTabOn");  
+});
+
 		
 var link, node, labelNode, graphLayout, container;
 update();
@@ -335,7 +472,6 @@ function update()
     .append("circle")
     .attr("r", 5)
     .attr("fill", function(d) { if(d.key){ return "green"; } else { return "red"; } } );
-
 		
   node.on("mouseover", focus).on("mouseout", unfocus);
 
@@ -345,7 +481,6 @@ function update()
         .on("drag", dragged)
         .on("end", dragended)
   );
-
 
   labelNode = container.append("g").attr("class", "labelNodes")
     .selectAll("text")
@@ -362,39 +497,33 @@ function update()
 
 
   node.on('click', function(paper) {
-    //var strWindowFeatures = "location=yes,height=570,width=520,scrollbars=yes,status=yes,target='Description'";
-    //var URL = d.keywords + ".html";
-    //var win = window.open(URL, "Description", strWindowFeatures);
-
-		//viewer.style("visibility", "visible");
-
-	var paperText = "<div class='menuItem'>Publication data</div>";
-	for (var field of paperFields)
-	{
-	  if(paper[field])
-	  {
-		if(field === "url")
+    var paperText = "<div class='menuItem'>Publication Data</div>";
+    for (var field of paperFields)
+    {
+	    if(paper[field])
 	    {
+		    if(field === "url")
+	      {
           paperText += "<div><b>"+field+"</b>: <a target='_blank' href='"+paper[field]+"'>"+paper[field]+"</a></div>";
-		}
-		else if(field === "doi")
-	    {
+		    }
+		    else if(field === "doi")
+	      {
           paperText += "<div><b>"+field+"</b>: <a target='_blank' href='http://www.doi.org/"+paper[field]+"'>"+paper[field]+"</a></div>";
-	    }
-		else
-		{
+	      }
+		    else
+		    {
           paperText += "<div><b>"+field+"</b>: "+paper[field]+"</div>";
+	      }
 	    }
-	  }
     }
-		
-	paperInfo.html(paperText);
 
-	var win = window.frames.viewerFrame.contentWindow;
+	  paperInfo.html(paperText);
+
+	  var win = window.frames.viewerFrame.contentWindow;
 
     win.postMessage(paper.language, 'https://vrozen.github.io/LoGaP:8080');
     		
-	//win.postMessage(paper.language, 'http://127.0.0.1:8000');
+	  //win.postMessage(paper.language, 'http://127.0.0.1:8000');
     //summary.html(d.keywords);
     //viewer.html("<iframe width='100%' height='100%' src='pdfjs/web/viewer.html?"+file+"#search='"+query+"'></iframe>");
     //summary.html("<input name='close' type='button' value='Close' id='Close'/><iframe src='pdfjs/web/viewer.html'></iframe>");
@@ -486,15 +615,15 @@ function dragended(d) {
 function filterByAuthor(name)
 {
   storeNodes.forEach(function(article) {
-	result = false;
+	  result = false;
     if(article.author)
-	{
-	  if(article.author.toLowerCase().includes(name))
 	  {
-	    result = true;
-	  }
+	    if(article.author.toLowerCase().includes(name))
+	    {
+	      result = true;
+	    }
     }
-	article.visible = article.visible && result;
+	  article.visible = article.visible && result;
   });
 }
 
@@ -516,44 +645,44 @@ function filterByYear(lowYear, highYear)
 function filterByTitle(word)
 {
   storeNodes.forEach(function(article) {
-	result = false;		
+	  result = false;		
     if(article.title)
-	{
-	  if(article.title.toLowerCase().includes(word))
 	  {
-		result = true;
-	  }
+	    if(article.title.toLowerCase().includes(word))
+	    {
+		    result = true;
+	    }
     }
-	article.visible = article.visible && result;
+	  article.visible = article.visible && result;
   });
 }
 
 function filterByLanguage(language)
 {
-   storeNodes.forEach(function(article) {
-	result = false;		
+  storeNodes.forEach(function(article) {
+    result = false;		
     if(article.language)
-	{
-	  if(article.language.toLowerCase() === language)
-	  {
-		result = true;
-	  }
+    {
+      if(article.language.toLowerCase() === language)
+      {
+        result = true;
+      }
     }
-	article.visible = article.visible && result;
-  });		
+    article.visible = article.visible && result;
+  });
 }
 
 langBox = d3.select("#language");
 foundLanguages = [];
 _nodes.forEach(function(n) {
-		if(n.language)
-	    {
-		  if(!foundLanguages.includes(n.language))
-		  {
-		    foundLanguages.push(n.language);
-		  }
-	    }
-  });
+  if(n.language)
+  {
+    if(!foundLanguages.includes(n.language))
+    {
+      foundLanguages.push(n.language);
+    }
+  }
+});
 
 foundLanguages.sort();
 
@@ -562,36 +691,79 @@ foundLanguages.forEach(function(language) {
 	.text(language)
 	.attr("value", language);
   });
-		
-controls = d3.select("#filter");
-controls.on("click", function(d) {
-    author = document.getElementById("author").value.toLowerCase();
 
-    lowYear = document.getElementById("lowYear").value;
+document.getElementById("author").addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') { search(e); }
+});
+
+document.getElementById("title").addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') { search(e); }
+});
+
+document.getElementById("lowYear").addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') { search(e); }
+});
+
+document.getElementById("highYear").addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') { search(e); }
+});
+
+document.getElementById("language").onchange = searchLanguage;
+
+function searchLanguage() {
+  language = d3.select("#language").property("value");
+
+  document.getElementById("author").value = "";
+
+  document.getElementById("lowYear").value = "";
+
+  document.getElementById("highYear").value = "";
+
+  document.getElementById("title").value = "";
+
+  storeNodes.forEach(function(n) { n.visible = true;});
+
+  if(language !== "")
+  {
+    filterByLanguage(language.toLowerCase());
+
+    var win = window.frames.viewerFrame.contentWindow;
+
+    win.postMessage(language, 'https://vrozen.github.io/LoGaP:8080');
+  }
+
+  filter();
+  update();
+};
+
+function search() {
+  author = document.getElementById("author").value.toLowerCase();
+
+  lowYear = document.getElementById("lowYear").value;
 
 	highYear = document.getElementById("highYear").value;
 
 	title = document.getElementById("title").value.toLowerCase();
 
-	language = d3.select("#language").property("value");
+  document.getElementById("language").selectedIndex = "-1";
 		
-    storeNodes.forEach(function(n) { n.visible = true;});
+  storeNodes.forEach(function(n) { n.visible = true;});
 		
-    if(author !== "")
-	{
-	  filterByAuthor(author);
-    }
+  if(author !== "")
+  {
+    filterByAuthor(author);
+  }
 
 	if(lowYear !== "" || highYear !== "")
-	{		
-      if(lowYear === "")
-  	  {
+	{
+    if(lowYear === "")
+  	{
 	    lowYear = 0;
-  	  }
-      if(highYear === "")
-      {
-        highYear = 9999;
-      }		
+  	}
+    if(highYear === "")
+    {
+      highYear = 9999;
+    }		
 	  filterByYear(lowYear, highYear);
 	}
 		
@@ -600,31 +772,24 @@ controls.on("click", function(d) {
 	  filterByTitle(title);
 	}
 
-	if(language !== "")
-	{
-	  filterByLanguage(language.toLowerCase());
-	  var win = window.frames.viewerFrame.contentWindow;
-      //win.postMessage(language, 'http://127.0.0.1:8000');
-	  win.postMessage(language, 'https://vrozen.github.io/LoGaP:8080');
-	}
+  filter();
+  update();
+};
 
-    filter();
-    update();
-});
 
 		
 function filter() {
 	_nodes = new Array();
-    _edges = new Array();		
+  _edges = new Array();		
 		
 	storeNodes.forEach(function(n) {
 	  if (n.visible) {
-		_nodes.push(n);
+		  _nodes.push(n);
 	  }
 	});
 
 	storeEdges.forEach(function(e) {
-      if(_nodes.includes(e.source) && _nodes.includes(e.target))
+    if(_nodes.includes(e.source) && _nodes.includes(e.target))
 	  {
 	    _edges.push(e);
 	  }
