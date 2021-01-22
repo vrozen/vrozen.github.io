@@ -760,7 +760,7 @@ function searchLanguage() {
 
   //var win = window.frames.viewerFrame.contentWindow;
 
-  var win = window.frames['viewerFrame'].contentWindow
+  document.getElementById("viewerFrame").contentWindow;
 
   win.postMessage(language, 'https://vrozen.github.io/LoGaP:8080');
 
