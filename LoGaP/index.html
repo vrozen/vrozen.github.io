@@ -756,14 +756,13 @@ function searchLanguage() {
 
   storeNodes.forEach(function(n) { n.visible = true;});
 
-  if(language !== "")
-  {
-    filterByLanguage(language.toLowerCase());
+  filterByLanguage(language.toLowerCase());
 
-    var win = window.frames.viewerFrame.contentWindow;
+  //var win = window.frames.viewerFrame.contentWindow;
 
-    win.postMessage(language, 'https://vrozen.github.io/LoGaP:8080');
-  }
+  var win = widnow.frames.getElementById("viewerFrame").contentWindow;
+
+  win.postMessage(language, 'https://vrozen.github.io/LoGaP:8080');
 
   filter();
   update();
