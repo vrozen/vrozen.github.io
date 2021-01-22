@@ -17,7 +17,7 @@
     display: flex;
     align-items: center;	
     font-family: Helvetica;
-    font-size: 14px;
+    font-size: 14 px;
     font-weight: bold;
     color: white;
     vertical-align: middle;	  
@@ -142,7 +142,7 @@
   #paperInfo {
     background-color:lightsteelblue;		
     position: absolute;
-    height: 100%;
+    height: 390px;
     width: 170px;
     top: 210;
     left: 0;
@@ -154,7 +154,7 @@
     position: absolute;
     visibility: hidden;
     height: 640px;
-    width: 1024px;
+    width: 1280px;
     top: 30;
     left: 190;
     padding: 5px 5px;		
@@ -199,7 +199,7 @@
 
 <div id="paperInfo"><div class='menuItem'>Publication Data</div></div>  
 
-<div id="viewer"><iframe id="viewerFrame" src="pdfjs/web/viewer.html" width="100%" height="100%"></iframe> </div>
+<div id="viewer"><iframe id="viewerFrame" src="pdfjs/web/viewer.html"></iframe> </div>
 
 <div id="Welcome" class="centerPageBig">
 <img width="100%" src="LoGaP.jpg">
@@ -307,8 +307,9 @@ finds the associated language summary inside the article.</li></ul>
 //Massimo Santini’s Block 53fed7d84cd1812d6a6639ed7aa83868
 //Updated June 4, 2019
 //license: GPL v3 
-var width = 1280;
-var height = 800;
+var width = window.innerWidth; 
+var height = window.innerHeight; 
+
 
 var storeNodes = [];
 var storeEdges = [];
@@ -355,16 +356,37 @@ var helpTab = d3.select("#HelpTab");
 var aboutTab = d3.select("#AboutTab");
 var closeTab = d3.select("#CloseTab");
 
+var svg = d3.select("#viz");
+var viewerFrame = d3.select("#viewerFrame");
 var viewer = d3.select("#viewer");
 var welcome = d3.select("#welcome");
 var about = d3.select("#about");
 var help = d3.select("#help");
+var paperInfo = d3.select("#paperInfo");
 
-var svg = d3.select("#viz")
-		.attr("width", width)
+function resize()
+{
+  width = window.innerWidth; 
+  height = window.innerHeight;
+
+  if(width < 800){ width = 800; }
+  if(height < 600){ height = 600; }
+
+  var viewerWidth = width - 210;
+  var viewerHeight = height - 50;
+
+  svg
+    .attr("width", width)
 		.attr("height", height);
 
-var paperInfo = d3.select("#paperInfo");
+  viewerFrame
+    .attr("width", viewerWidth)
+    .attr("height", viewerHeight);  
+}
+
+window.onresize = resize;
+
+resize();
 
 function clearTabs()
 {
