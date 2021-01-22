@@ -404,6 +404,7 @@ resize();
 function clearTabs()
 {
   viewer.style("visibility", "hidden");
+  viewerFrame.style("visibility", "hidden");
   welcome.style("visibility", "hidden");
   about.style("visibility", "hidden"); 
   help.style("visibility", "hidden");
@@ -424,9 +425,9 @@ welcomeTab.on("click", function(d){
 viewerTab.on("click", function(d){
   clearTabs();  
   viewer.style("visibility", "visible");
+  viewerFrame.style("visibility", "visible");
   viewerTab.attr("class", "menuTabOn");
 });
-
 
 aboutTab.on("click", function(d){
   clearTabs();  
