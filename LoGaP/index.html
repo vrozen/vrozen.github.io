@@ -128,6 +128,17 @@
     top: 0;
     left: 0;
   }
+
+  #controlsBar {
+    background-color: lightsteelblue;	
+    position: absolute;
+    display: flex;
+    height: 100%;
+    width: 170;
+    top: 0;
+    left: 0;
+    padding: 5px 10px;    
+  } 
   
   #controls {
     background-color: lightsteelblue;		
@@ -162,6 +173,8 @@
 </style>
 
 <body>
+<div id="controlsBar"></div>
+
 <div id="menuBar">
   <div class="title">Languages of Games and Play</div>
   <div class="menuTabOn" id="WelcomeTab">Welcome</div>
@@ -368,12 +381,12 @@ function resize()
 {
   width = window.innerWidth; 
   height = window.innerHeight;
-
-  if(width < 800){ width = 800; }
-  if(height < 600){ height = 600; }
-
+  
   var viewerWidth = width - 210;
   var viewerHeight = height - 50;
+
+  if(width < 800){ viewerWidth = 640; }
+  if(height < 600){ viewerHeight = 600; }
 
   svg
     .attr("width", width)
