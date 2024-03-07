@@ -1,0 +1,53 @@
+---
+layout: default
+---
+<article class="post">
+  {%- if page.title == 'Research and Development' or page.menu == 'languages' or page.menu == 'research' -%}  
+  {%- assign default_paths = site.pages | map: "path" -%}
+  {%- assign page_paths = site.header_pages | default: default_paths -%}
+  {%- if page_paths -%}
+
+  <div style="height: 80px; width: 100%;">
+    <nav style="background-image: url(/assets/bar.png); 
+    background-position: left;
+    background-repeat:
+    repeat-x;
+    padding-top: 16px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 10px;
+    justify-content: space-between;">  
+        {%- for path in page_paths -%}
+        {%- assign my_page = site.pages | where: "path", path | first -%}
+        {% if my_page.menu == 'languages' %}
+        {% if my_page.title == page.title or page.menu != 'languages' %}
+        <a href="{{ my_page.url | relative_url }}">
+          <img src="{{ site.url }}/assets/{{ my_page.icon }}" style="width: 60px; height: 60px; background-color: white; border: 2px solid black;">
+        </a>
+        {%- else -%}
+        <a href="{{ my_page.url | relative_url }}">
+          <div style="background-color: white">
+            <img src="{{ site.url }}/assets/{{ my_page.icon }}" style="width: 60px; height: 60px; background-color: white; border: 2px solid darkslategrey; filter: grayscale(100%) opacity(50%);">
+          </div>
+        </a>
+        {%- endif -%}
+        {%- endif -%}
+        {%- endfor -%}
+      </nav>
+  </div>
+  {%- endif -%}
+  {%- endif -%}
+
+  {%- if page.menu == 'languages' or page.menu == 'research' or page.title == 'Research and Development' -%}
+  {%- else -%}
+  <header class="post-header">
+    <h1 class="post-title">{{ page.title | escape }}</h1>
+  </header>
+  {%- endif -%}
+
+  <div class="post-content">
+    {{ content }}
+  </div>
+
+</article>
