@@ -22,9 +22,9 @@
             {%- assign my_page = site.pages | where: "path", path | first -%}
             {% if my_page.menu == 'main' %}         
               {% if my_page.title == page.title %}                         
-              <a class="page-link" style="font-weight: bolder;" href="{{ my_page.url | relative_url }}">{{ my_page.title | escape }}</a>
+              <a class="page-link" style="font-weight: bolder;" href="{{ my_page.url | relative_url }}">{{ my_page.item | escape }}</a>
               {%- else -%}
-              <a class="page-link" href="{{ my_page.url | relative_url }}">{{ my_page.title | escape }}</a>
+              <a class="page-link" href="{{ my_page.url | relative_url }}">{{ my_page.item | escape }}</a>
               {%- endif -%}
             {%- endif -%}
           {%- endfor -%}
