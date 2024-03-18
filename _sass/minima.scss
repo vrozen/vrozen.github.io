@@ -49,3 +49,36 @@ $on-laptop:        1024px !default;
   "minima/layout",
   "minima/syntax-highlighting"
 ;
+
+
+/**
+ * Research items
+ */
+ .research-container
+ {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;  
+ }
+
+.research-image-container
+{
+  //flex: 1;
+  //padding-left: 0px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  //float: left;
+}
+
+.research-image
+{
+  max-width: 120px;
+  max-height: 120px;
+  border: 2px solid black
+}
+
+.research-text
+{
+  flex: 1;
+  //float: right;  
+}
