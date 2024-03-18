@@ -39,7 +39,7 @@ Ben je geïnteresseerd in game-based learning en wil je weten hoe je spellen kun
 ### Workshopgevers
 * Anders Bouwer is kwartiermaker Smart Education bij FOO en docentonderzoeker bij FDMCI. Hij werkt aan diverse projecten rond educatieve games, tools voor game design, en AI in het onderwijs.
 * Daan van Smaalen werkt als lerarenopleider bij FOO. Hij is betrokken bij verschillende projecten rondom game-based learning.
-* Riemer van Rozen is wetenschapper bij Centrum Wiskunde & Informatica. Hij verricht toegepast onderzoek naar visuele programmeertalen die het programmeren makkelijker en leuker maken.
+* Riemer van Rozen is een wetenschapper bij Centrum Wiskunde & Informatica. Hij verricht toegepast onderzoek naar visuele programmeertalen die het programmeren makkelijker en leuker maken.
 
 ### References
 1. Riemer van Rozen. "Cascade: A Meta-Language for Change, Cause and Effect". In: *Proceedings of the International Conference on Software Language Engineering.* ACM, 2023. DOI: [10.1145/3623476.3623515](https://doi.org/10.1145/3623476.3623515)
