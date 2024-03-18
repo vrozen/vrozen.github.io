@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Workshop on Game Design for Education at HvA Actieffabriek"
+title:  "Workshop on Game Design for Education"
 author: Riemer van Rozen
 affiliation: CWI
 city: Amsterdam
@@ -22,7 +22,7 @@ The event, consisting of keynotes and workshops, is
 held on Thursday March 21st 2024
 at the Amsterdam Univesity of Applied Sciences.
 As part of the program, from 15:30 to 16:20,
-we will host a workshop on *Desiging Games for Education*.
+we will host a workshop on *Game Design for Education*.
 
 Together with particiants, we will explore
 how to support learning *by making games*.
