@@ -30,7 +30,7 @@ a visual programming environment for game design,
 for this purpose.
 Please find the Dutch title and abstract below.
 
-Thanks to Anders Bouwer and Daan Smaalen for inviting me as a last-minute addition to the program!
+Thanks to Anders and Daan for inviting me as a last-minute addition to the program!
 
 ### Games ontwerpen voor je onderwijs
 Ben je geïnteresseerd in game-based learning en wil je weten hoe je spellen kunt ontwerpen voor je onderwijs? In deze workshop ga je - aan de hand van enkele raamwerken uit de game design wereld - (educatieve) spellen analyseren en (her)ontwerpen. [lees meer](https://actieffabriek.event-hva.nl/page/1470696/1484619).
