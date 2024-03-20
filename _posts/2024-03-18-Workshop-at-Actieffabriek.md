@@ -20,7 +20,7 @@ symposium on *Education that Activates Students to Learn*.
 This event, organized for teachers, education developers and educational experts,
 will be held on Thursday March 21st 2024 at the Amsterdam Univesity of Applied Sciences.
 The program consists of keynotes and workshops.
-Anders Bouwer, Daan Smaalen and myself will host a workshop on
+Anders Bouwer, Daan van Smaalen and myself will host a workshop on
 *Game Design for Education*.
 
 Together with particiants, we will explore
