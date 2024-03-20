@@ -16,13 +16,12 @@ Vie Banner
 </div>
 
 [Actieffabriek](https://actieffabriek.event-hva.nl/) is a 
-symposium on *Activating Education*
-for teachers, education developers and educational experts.
-The event, consisting of keynotes and workshops, is
-held on Thursday March 21st 2024
-at the Amsterdam Univesity of Applied Sciences.
-As part of the program, from 15:30 to 16:20,
-we will host a workshop on *Game Design for Education*.
+symposium on *Education that Activates Students to Learn*.
+This event, for teachers, education developers and educational experts,
+will be held on Thursday March 21st 2024 at the Amsterdam Univesity of Applied Sciences.
+As part of the program, which consits of keynotes and workshops,
+Anders Bouwer, Daan Smaalen and myself will host a workshop on
+*Game Design for Education* from from 15:30 to 16:20.
 
 Together with particiants, we will explore
 how to support learning *by making games*.
