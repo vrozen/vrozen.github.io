@@ -24,7 +24,7 @@ Anders Bouwer, Daan Smaalen and myself will host a workshop on
 *Game Design for Education*.
 
 Together with particiants, we will explore
-how to support learning *by making games*.
+how to support *learning by making games*.
 My contribution will be that we explore how we can use Vie [1,2,3],
 a visual programming environment for game design,
 for this purpose.
