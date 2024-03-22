@@ -8,7 +8,7 @@ layout: default
   {%- if page_paths -%}
 
   <div style="width: 100%; padding-bottom: 24px;">
-    <nav style="background-image: url(/assets/bar.png);
+    <nav style="background-image: url(/assets/bar.png); 
     background-position: left;
     background-repeat: repeat-x;
     width: 100%;
@@ -19,11 +19,11 @@ layout: default
         {%- assign my_page = site.pages | where: "path", path | first -%}
         {% if my_page.menu == 'languages' %}
         {% if my_page.title == page.title or page.menu != 'languages' %}
-        <a href="{{ my_page.url | relative_url }}" style="display: inline-block; padding-left: 20px; padding-right: 20px; width: 60px; height: 60px; text-align: center; text-decoration: none;">
+        <a href="{{ my_page.url | relative_url }}" style="display: inline-block; padding-left: 16px; padding-right: 16px; width: 60px; height: 60px;">
           <img src="{{ site.url }}/assets/{{ my_page.icon }}" style="width: 60px; height: 60px; background-color: white; border: 2px solid black;">
         </a>
         {%- else -%}
-        <a href="{{ my_page.url | relative_url }}" style="display: inline-block; padding-left: 20px; padding-right: 20px; width: 60px; height: 60px; text-align: center; text-decoration: none;">
+        <a href="{{ my_page.url | relative_url }}" style="display: inline-block; padding-left: 16px; padding-right: 16px; width: 60px; height: 60px;">
           <div style="background-color: white">
             <img src="{{ site.url }}/assets/{{ my_page.icon }}" style="width: 60px; height: 60px; background-color: white; border: 2px solid darkslategrey; filter: grayscale(100%) opacity(50%);">
           </div>
