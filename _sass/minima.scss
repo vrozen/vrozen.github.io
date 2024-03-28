@@ -58,22 +58,22 @@ $on-laptop:        1024px !default;
  {
   width: 100%;
   display: flex;
-  justify-content: space-between;  
+  justify-content: space-between; 
+  align-items: center; 
+  padding-bottom: 12px;
  }
 
 .research-image-container
 {
   //flex: 1;
-  //padding-left: 0px;
-  padding-right: 40px;
-  padding-bottom: 40px;
+  padding-right: 24px;
   //float: left;
 }
 
 .research-image
 {
-  max-width: 120px;
-  max-height: 120px;
+  width: 120px;
+  height: 120px;
   border: 1px solid black
 }
 
